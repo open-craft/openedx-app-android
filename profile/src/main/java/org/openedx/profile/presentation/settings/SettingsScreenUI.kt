@@ -167,12 +167,6 @@ internal fun SettingsScreen(
                                         .verticalScroll(rememberScrollState()),
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
-                                    Spacer(Modifier.height(30.dp))
-
-                                    ManageAccountSection(onManageAccountClick = {
-                                        onAction(SettingsScreenAction.ManageAccountClick)
-                                    })
-
                                     Spacer(modifier = Modifier.height(24.dp))
 
                                     SettingsSection(
@@ -244,24 +238,6 @@ private fun SettingsSection(
 }
 
 @Composable
-private fun ManageAccountSection(onManageAccountClick: () -> Unit) {
-    Column {
-        Card(
-            shape = MaterialTheme.appShapes.cardShape,
-            elevation = 0.dp,
-            backgroundColor = MaterialTheme.appColors.cardViewBackground
-        ) {
-            Column(Modifier.fillMaxWidth()) {
-                SettingsItem(
-                    text = stringResource(id = R.string.core_manage_account),
-                    onClick = onManageAccountClick
-                )
-            }
-        }
-    }
-}
-
-@Composable
 private fun SupportInfoSection(
     uiState: SettingsUIState.Data,
     appUpgradeEvent: AppUpgradeEvent?,
@@ -282,7 +258,7 @@ private fun SupportInfoSection(
             backgroundColor = MaterialTheme.appColors.cardViewBackground
         ) {
             Column(Modifier.fillMaxWidth()) {
-                if (uiState.configuration.supportEmail.isNotBlank()) {
+                if (uiState.configuration.agreementUrls.contactSupportUrl.isNotBlank()) {
                     SettingsItem(text = stringResource(id = profileR.string.profile_contact_support)) {
                         onAction(SettingsScreenAction.SupportClick)
                     }

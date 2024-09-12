@@ -167,12 +167,6 @@ internal fun SettingsScreen(
                                         .verticalScroll(rememberScrollState()),
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
-                                    Spacer(Modifier.height(30.dp))
-
-                                    ManageAccountSection(onManageAccountClick = {
-                                        onAction(SettingsScreenAction.ManageAccountClick)
-                                    })
-
                                     Spacer(modifier = Modifier.height(24.dp))
 
                                     SettingsSection(
@@ -282,7 +276,7 @@ private fun SupportInfoSection(
             backgroundColor = MaterialTheme.appColors.cardViewBackground
         ) {
             Column(Modifier.fillMaxWidth()) {
-                if (uiState.configuration.supportEmail.isNotBlank()) {
+                if (uiState.configuration.agreementUrls.contactSupportUrl.isNotBlank()) {
                     SettingsItem(text = stringResource(id = profileR.string.profile_contact_support)) {
                         onAction(SettingsScreenAction.SupportClick)
                     }

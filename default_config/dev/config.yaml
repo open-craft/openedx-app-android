@@ -11,7 +11,8 @@ AGREEMENT_URLS:
   PRIVACY_POLICY_URL: ''
   COOKIE_POLICY_URL: ''
   DATA_SELL_CONSENT_URL: ''
-  TOS_URL: ''
+  CONTACT_SUPPORT_URL: 'https://eshemoeasu.my.site.com/help/s/'
+  TOS_URL: 'https://courses.ethernet.edu.et/terms'
   EULA_URL: ''
   SUPPORTED_LANGUAGES: [ ] #en is default language
 

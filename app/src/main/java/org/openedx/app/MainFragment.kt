@@ -50,11 +50,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     binding.viewPager.setCurrentItem(0, false)
                 }
 
-                R.id.fragmentDiscover -> {
-                    viewModel.logDiscoveryTabClickedEvent()
-                    binding.viewPager.setCurrentItem(1, false)
-                }
-
                 R.id.fragmentProfile -> {
                     viewModel.logProfileTabClickedEvent()
                     binding.viewPager.setCurrentItem(2, false)
@@ -68,9 +63,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.navigateToDiscovery.collect { shouldNavigateToDiscovery ->
-                if (shouldNavigateToDiscovery) {
-                    binding.bottomNavView.selectedItemId = R.id.fragmentDiscover
+            viewModel.navigateToHome.collect { shouldNavigateToHome ->
+                if (shouldNavigateToHome) {
+                    binding.bottomNavView.selectedItemId = R.id.fragmentLearn
                 }
             }
         }
@@ -92,13 +87,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             when (requireArguments().getString(ARG_OPEN_TAB, "")) {
                 HomeTab.LEARN.name,
-                HomeTab.PROGRAMS.name -> {
-                    binding.bottomNavView.selectedItemId = R.id.fragmentLearn
-                }
-
-                HomeTab.DISCOVER.name -> {
-                    binding.bottomNavView.selectedItemId = R.id.fragmentDiscover
-                }
 
                 HomeTab.PROFILE.name -> {
                     binding.bottomNavView.selectedItemId = R.id.fragmentProfile
@@ -114,14 +102,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.viewPager.offscreenPageLimit = 4
 
         val openTab = requireArguments().getString(ARG_OPEN_TAB, HomeTab.LEARN.name)
-        val learnTab = if (openTab == HomeTab.PROGRAMS.name) {
-            LearnTab.PROGRAMS
-        } else {
-            LearnTab.COURSES
-        }
+        val learnTab = LearnTab.COURSES
         adapter = NavigationFragmentAdapter(this).apply {
             addFragment(LearnFragment.newInstance(openTab = learnTab.name))
-            addFragment(viewModel.getDiscoveryFragment)
             addFragment(ProfileFragment())
         }
         binding.viewPager.adapter = adapter

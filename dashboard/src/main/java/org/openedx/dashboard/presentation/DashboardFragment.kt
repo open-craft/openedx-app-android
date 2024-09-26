@@ -437,7 +437,7 @@ private fun CourseItem(
             ) {
                 Text(
                     modifier = Modifier.testTag("txt_course_org"),
-                    text = enrolledCourse.course.org+"+"+enrolledCourse.course.number,
+                    text = enrolledCourse.course.org + "+" + enrolledCourse.course.number,
                     color = MaterialTheme.appColors.textFieldHint,
                     style = MaterialTheme.appTypography.labelMedium
                 )

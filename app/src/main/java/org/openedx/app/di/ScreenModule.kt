@@ -117,7 +117,7 @@ val screenModule = module {
     viewModel { RestorePasswordViewModel(get(), get(), get(), get()) }
 
     factory { DashboardRepository(get(), get(), get()) }
-    factory { DashboardInteractor(get()) }
+    factory { DashboardInteractor(get(), get()) }
     viewModel { DashboardViewModel(get(), get(), get(), get(), get(), get(), get()) }
 
     factory { DiscoveryRepository(get(), get(), get()) }

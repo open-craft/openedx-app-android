@@ -1,4 +1,4 @@
-API_HOST_URL: 'http://localhost:8000'
+API_HOST_URL: 'http://localhost:8000/'
 APPLICATION_ID: 'org.openedx.app'
 ENVIRONMENT_DISPLAY_NAME: 'Localhost'
 URI_SCHEME: ''

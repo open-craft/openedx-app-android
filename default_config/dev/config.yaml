@@ -1,4 +1,4 @@
-API_HOST_URL: 'https://lms.quince-sandbox.eshe.opencraft.hosting'
+API_HOST_URL: 'https://lms.quince-sandbox.eshe.opencraft.hosting/'
 APPLICATION_ID: 'org.openedx.app'
 ENVIRONMENT_DISPLAY_NAME: 'Eshe dev'
 URI_SCHEME: ''

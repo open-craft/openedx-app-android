@@ -388,8 +388,7 @@ private fun CourseItem(
             )
         )
     }
-    val imageUrl = apiHostUrl + enrolledCourse.course.courseImage
-
+    val imageUrl = apiHostUrl.dropLast(1) + enrolledCourse.course.courseImage
     val context = LocalContext.current
     Surface(
         modifier = Modifier

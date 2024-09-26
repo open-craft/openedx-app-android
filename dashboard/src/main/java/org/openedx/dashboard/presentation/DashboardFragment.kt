@@ -437,7 +437,7 @@ private fun CourseItem(
             ) {
                 Text(
                     modifier = Modifier.testTag("txt_course_org"),
-                    text = enrolledCourse.course.org,
+                    text = enrolledCourse.course.org+"+"+enrolledCourse.course.number,
                     color = MaterialTheme.appColors.textFieldHint,
                     style = MaterialTheme.appTypography.labelMedium
                 )
@@ -457,22 +457,6 @@ private fun CourseItem(
                         overflow = TextOverflow.Ellipsis
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-                    if (enrolledCourse.course.number.isNotEmpty()) {
-                        Row(
-                            Modifier
-                                .fillMaxWidth()
-                                .background(MaterialTheme.appColors.background),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Text(
-                                modifier = Modifier.testTag("txt_course_number"),
-                                text = enrolledCourse.course.number,
-                                color = MaterialTheme.appColors.textFieldHint,
-                                style = MaterialTheme.appTypography.labelMedium
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(4.dp))
-                    }
                     Row(
                         Modifier
                             .fillMaxWidth()

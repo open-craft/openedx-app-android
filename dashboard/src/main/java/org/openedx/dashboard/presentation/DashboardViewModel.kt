@@ -1,9 +1,11 @@
 package org.openedx.dashboard.presentation
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.openedx.core.BaseViewModel
 import org.openedx.core.R
@@ -114,6 +116,19 @@ class DashboardViewModel(
             }
             _updating.value = false
             isLoading = false
+        }
+    }
+
+    suspend fun getCourseEffort(courseId: String): String {
+        return try {
+            val course = if (hasInternetConnection) {
+                interactor.getCourseDetails(courseId)
+            } else {
+                interactor.getCourseDetailsFromCache(courseId)
+            }
+            course?.effort ?: "N/A"
+        } catch (e: Exception) {
+            "N/A"
         }
     }
 

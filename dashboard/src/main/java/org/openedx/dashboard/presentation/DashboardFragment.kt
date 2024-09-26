@@ -43,6 +43,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -97,6 +98,7 @@ import org.openedx.core.utils.TimeUtils
 import org.openedx.dashboard.R
 import java.util.Date
 import org.openedx.core.R as CoreR
+import androidx.compose.material.icons.filled.AccessTime
 
 class DashboardFragment : Fragment() {
 
@@ -157,6 +159,9 @@ class DashboardFragment : Fragment() {
                     ),
                     onSettingsClick = {
                         router.navigateToSettings(requireActivity().supportFragmentManager)
+                    },
+                    getCourseEffort = { courseId ->
+                        viewModel.getCourseEffort(courseId)
                     }
                 )
             }
@@ -179,6 +184,7 @@ internal fun MyCoursesScreen(
     paginationCallback: () -> Unit,
     onSettingsClick: () -> Unit,
     onItemClick: (EnrolledCourse) -> Unit,
+    getCourseEffort: suspend (String) -> String,
     appUpgradeParameters: AppUpdateState.AppUpgradeParameters,
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -289,10 +295,14 @@ internal fun MyCoursesScreen(
                                             }
                                         }
                                         items(state.courses) { course ->
+                                            val effort by produceState(initialValue = "Loading") {
+                                                value = getCourseEffort(course.course.id).toString()
+                                            }
                                             CourseItem(
                                                 apiHostUrl,
                                                 course,
                                                 windowSize,
+                                                effort.toString(),
                                                 onClick = { onItemClick(it) })
                                             Divider()
                                         }
@@ -378,6 +388,7 @@ private fun CourseItem(
     apiHostUrl: String,
     enrolledCourse: EnrolledCourse,
     windowSize: WindowSize,
+    effort: String,
     onClick: (EnrolledCourse) -> Unit
 ) {
     val imageWidth by remember(key1 = windowSize) {
@@ -426,7 +437,7 @@ private fun CourseItem(
             ) {
                 Text(
                     modifier = Modifier.testTag("txt_course_org"),
-                    text = enrolledCourse.course.org,
+                    text = enrolledCourse.course.org + "+" + enrolledCourse.course.number,
                     color = MaterialTheme.appColors.textFieldHint,
                     style = MaterialTheme.appTypography.labelMedium
                 )
@@ -445,6 +456,26 @@ private fun CourseItem(
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.appColors.background),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.AccessTime,
+                            contentDescription = null,
+                            tint = MaterialTheme.appColors.textFieldHint,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = effort,
+                            color = MaterialTheme.appColors.textFieldHint,
+                            style = MaterialTheme.appTypography.labelMedium
+                        )
+                    }
                     Row(
                         Modifier
                             .fillMaxWidth()
@@ -544,6 +575,7 @@ private fun CourseItemPreview() {
             "http://localhost:8000",
             mockCourseEnrolled,
             WindowSize(WindowType.Compact, WindowType.Compact),
+            "",
             onClick = {})
     }
 }
@@ -575,6 +607,7 @@ private fun MyCoursesScreenDay() {
             canLoadMore = false,
             paginationCallback = {},
             onSettingsClick = {},
+            getCourseEffort = { "Mock Effort" },
             appUpgradeParameters = AppUpdateState.AppUpgradeParameters()
         )
     }
@@ -607,6 +640,7 @@ private fun MyCoursesScreenTabletPreview() {
             canLoadMore = false,
             paginationCallback = {},
             onSettingsClick = {},
+            getCourseEffort = { "Mock Effort" },
             appUpgradeParameters = AppUpdateState.AppUpgradeParameters()
         )
     }

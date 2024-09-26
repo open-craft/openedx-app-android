@@ -83,4 +83,3 @@ BROWSER_REGISTRATION: false
 #Course navigation feature flags
 COURSE_NESTED_LIST_ENABLED: false
 COURSE_UNIT_PROGRESS_ENABLED: false
-

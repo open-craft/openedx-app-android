@@ -1,10 +1,10 @@
-API_HOST_URL: 'https://lms.quince-sandbox.eshe.opencraft.hosting/'
-APPLICATION_ID: 'org.openedx.app'
+API_HOST_URL: 'https://lms.dev.eshe.edpl.us'
+APPLICATION_ID: 'et.edu.ethernet.app.dev'
 ENVIRONMENT_DISPLAY_NAME: 'Eshe dev'
 URI_SCHEME: ''
 FEEDBACK_EMAIL_ADDRESS: 'support@example.com'
 FAQ_URL: ''
-OAUTH_CLIENT_ID: 'android-app-client-id'
+OAUTH_CLIENT_ID: 'OsPoP501BYx7G2oJDK3yJ5xEySEUKiJREobHV864'
 
 # Keep empty to hide setting
 AGREEMENT_URLS:
@@ -71,15 +71,15 @@ BRANCH:
 PLATFORM_NAME: "OpenEdX"
 PLATFORM_FULL_NAME: "OpenEdX"
 #tokenType enum accepts JWT and BEARER only
-TOKEN_TYPE: "JWT"
+TOKEN_TYPE: "BEARER"
 #feature flag for activating What’s New feature
 WHATS_NEW_ENABLED: false
 #feature flag enable Social Login buttons
 SOCIAL_AUTH_ENABLED: false
 #feature flag to do the authentication flow in the browser to log in
-BROWSER_LOGIN: false
+BROWSER_LOGIN: true
 #feature flag to do the registration for in the browser
-BROWSER_REGISTRATION: false
+BROWSER_REGISTRATION: true
 #Course navigation feature flags
 COURSE_NESTED_LIST_ENABLED: false
 COURSE_UNIT_PROGRESS_ENABLED: false

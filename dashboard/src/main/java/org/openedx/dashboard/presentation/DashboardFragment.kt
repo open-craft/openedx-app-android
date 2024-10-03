@@ -24,7 +24,9 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
@@ -35,6 +37,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -98,7 +101,6 @@ import org.openedx.core.utils.TimeUtils
 import org.openedx.dashboard.R
 import java.util.Date
 import org.openedx.core.R as CoreR
-import androidx.compose.material.icons.filled.AccessTime
 
 class DashboardFragment : Fragment() {
 
@@ -328,7 +330,7 @@ internal fun MyCoursesScreen(
                         is DashboardUIState.Empty -> {
                             Box(
                                 modifier = Modifier.fillMaxSize(),
-                                contentAlignment = Alignment.Center
+                                contentAlignment = Alignment.Center,
                             ) {
                                 Column(
                                     Modifier
@@ -539,13 +541,18 @@ private fun Header() {
 
 @Composable
 private fun EmptyState() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Column(
-            Modifier.width(185.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            Modifier
+                .fillMaxSize()
+                .weight(1f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.dashboard_ic_empty),
@@ -563,6 +570,13 @@ private fun EmptyState() {
                 textAlign = TextAlign.Center
             )
         }
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.dashboard_pull_to_refresh),
+            color = MaterialTheme.appColors.textSecondary,
+            style = MaterialTheme.appTypography.labelSmall,
+            textAlign = TextAlign.Center
+        )
     }
 }
 
@@ -631,6 +645,31 @@ private fun MyCoursesScreenTabletPreview() {
                     mockCourseEnrolled
                 )
             ),
+            uiMessage = null,
+            onSwipeRefresh = {},
+            onItemClick = {},
+            onReloadClick = {},
+            hasInternetConnection = true,
+            refreshing = false,
+            canLoadMore = false,
+            paginationCallback = {},
+            onSettingsClick = {},
+            getCourseEffort = { "Mock Effort" },
+            appUpgradeParameters = AppUpdateState.AppUpgradeParameters()
+        )
+    }
+}
+
+
+@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun EmptyStatePreview() {
+    OpenEdXTheme {
+        MyCoursesScreen(
+            windowSize = WindowSize(WindowType.Compact, WindowType.Compact),
+            apiHostUrl = "http://localhost:8000",
+            state = DashboardUIState.Empty,
             uiMessage = null,
             onSwipeRefresh = {},
             onItemClick = {},

@@ -201,7 +201,7 @@ class CourseContainerViewModel(
 
     private fun loadCourseImage(imageUrl: String?) {
         imageProcessor.loadImage(
-            imageUrl = config.getApiHostURL() + imageUrl,
+            imageUrl = config.getApiHostURL().trimEnd('/') + "/" + imageUrl?.removePrefix("/"),
             defaultImage = CoreR.drawable.core_no_image_course,
             onComplete = { drawable ->
                 val bitmap = (drawable as BitmapDrawable).bitmap.apply {

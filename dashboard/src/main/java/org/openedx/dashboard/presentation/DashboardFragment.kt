@@ -401,7 +401,7 @@ private fun CourseItem(
             )
         )
     }
-    val imageUrl = apiHostUrl.dropLast(1) + enrolledCourse.course.courseImage
+    val imageUrl = apiHostUrl.trimEnd('/') + "/" + enrolledCourse.course.courseImage.removePrefix("/")
     val context = LocalContext.current
     Surface(
         modifier = Modifier

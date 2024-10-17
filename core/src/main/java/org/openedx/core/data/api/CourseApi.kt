@@ -9,6 +9,7 @@ import org.openedx.core.data.model.CourseEnrollments
 import org.openedx.core.data.model.CourseStructureModel
 import org.openedx.core.data.model.HandoutsModel
 import org.openedx.core.data.model.ResetCourseDates
+import org.openedx.core.data.model.SequenceModel
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -67,4 +68,7 @@ interface CourseApi {
 
     @GET("/api/mobile/v1/course_info/{course_id}/updates")
     suspend fun getAnnouncements(@Path("course_id") courseId: String): List<AnnouncementModel>
+
+    @GET("api/courseware/sequence/{sequence_id}/")
+    suspend fun getSequence(@Path("sequence_id") sequenceId: String): SequenceModel
 }

@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -238,6 +239,34 @@ private fun CourseSectionScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 CircularProgressIndicator(color = MaterialTheme.appColors.primary)
+                            }
+                        }
+
+                        is CourseSectionUIState.Gated -> {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_course_gated),
+                                    contentDescription = "gated",
+                                    modifier = Modifier.size(48.dp)
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    modifier = Modifier
+                                        .padding(horizontal = 16.dp)
+                                        .fillMaxWidth(),
+                                    text = stringResource(
+                                        id = R.string.course_gated_subsection,
+                                        uiState.prereqSubsectionName ?: ""
+                                    ),
+                                    textAlign = TextAlign.Center,
+                                    style = MaterialTheme.appTypography.titleMedium,
+                                    color = MaterialTheme.appColors.textPrimary,
+
+                                )
                             }
                         }
 

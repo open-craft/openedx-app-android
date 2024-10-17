@@ -88,6 +88,14 @@ class CourseSectionViewModel(
         _uiState.value = CourseSectionUIState.Loading
         viewModelScope.launch {
             try {
+                val sectionData = interactor.getSubsection(blockId)
+                if (sectionData.gatedContent.gated) {
+                    _uiState.value = CourseSectionUIState.Gated(
+                        gatedSubsectionName = sectionData.gatedContent.gatedSubsectionName,
+                        prereqSubsectionName = sectionData.gatedContent.prereqSubsectionName
+                    )
+                    return@launch
+                }
                 val courseStructure = when (mode) {
                     CourseViewMode.FULL -> interactor.getCourseStructureFromCache()
                     CourseViewMode.VIDEOS -> interactor.getCourseStructureForVideos()

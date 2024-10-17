@@ -85,4 +85,6 @@ class CourseRepository(
 
     suspend fun getAnnouncements(courseId: String) =
         api.getAnnouncements(courseId).map { it.mapToDomain() }
+
+    suspend fun getSequence(sectionId: String) = api.getSequence(sectionId).mapToDomain()
 }

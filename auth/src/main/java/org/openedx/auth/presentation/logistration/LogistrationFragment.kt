@@ -87,7 +87,8 @@ class LogistrationFragment : Fragment() {
                     },
                     onSearchClick = { querySearch ->
                         viewModel.navigateToDiscovery(parentFragmentManager, querySearch)
-                    }
+                    },
+                    isRegistrationEnabled = viewModel.isRegistrationEnabled
                 )
             }
         }
@@ -111,6 +112,7 @@ private fun LogistrationScreen(
     onSearchClick: (String) -> Unit,
     onRegisterClick: () -> Unit,
     onSignInClick: () -> Unit,
+    isRegistrationEnabled: Boolean,
 ) {
 
     var textFieldValue by rememberSaveable(stateSaver = TextFieldValue.Saver) {
@@ -196,7 +198,11 @@ private fun LogistrationScreen(
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                AuthButtonsPanel(onRegisterClick = onRegisterClick, onSignInClick = onSignInClick)
+                AuthButtonsPanel(
+                    onRegisterClick = onRegisterClick,
+                    onSignInClick = onSignInClick,
+                    showRegisterButton = isRegistrationEnabled
+                )
             }
         }
     }
@@ -212,7 +218,8 @@ private fun LogistrationPreview() {
         LogistrationScreen(
             onSearchClick = {},
             onSignInClick = {},
-            onRegisterClick = {}
+            onRegisterClick = {},
+            isRegistrationEnabled = true,
         )
     }
 }

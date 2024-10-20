@@ -89,6 +89,7 @@ class SignInViewModelTest {
         every { config.getMicrosoftConfig() } returns MicrosoftConfig()
         every { config.isBrowserLoginEnabled() } returns false
         every { config.isBrowserRegistrationEnabled() } returns false
+        every { config.isRegistrationEnabled() } returns true
     }
 
     @After

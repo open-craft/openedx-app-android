@@ -223,3 +223,19 @@ private fun LogistrationPreview() {
         )
     }
 }
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(name = "NEXUS_9_Light", device = Devices.NEXUS_9, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(name = "NEXUS_9_Night", device = Devices.NEXUS_9, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun LogistrationRegistrationDisabledPreview() {
+    OpenEdXTheme {
+        LogistrationScreen(
+            onSearchClick = {},
+            onSignInClick = {},
+            onRegisterClick = {},
+            isRegistrationEnabled = false,
+        )
+    }
+}

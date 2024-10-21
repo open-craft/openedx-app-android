@@ -79,6 +79,8 @@ SOCIAL_AUTH_ENABLED: false
 BROWSER_LOGIN: false
 #feature flag to do the registration for in the browser
 BROWSER_REGISTRATION: false
+#feature flag to disable registration from app
+REGISTRATION_ENABLED: false
 #Course navigation feature flags
 COURSE_NESTED_LIST_ENABLED: false
 COURSE_UNIT_PROGRESS_ENABLED: false

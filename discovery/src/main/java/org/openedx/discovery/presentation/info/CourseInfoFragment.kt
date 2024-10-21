@@ -122,6 +122,7 @@ class CourseInfoFragment : Fragment() {
                     uiMessage = uiMessage,
                     uriScheme = viewModel.uriScheme,
                     hasInternetConnection = hasInternetConnection,
+                    isRegistrationEnabled = viewModel.isRegistrationEnabled,
                     checkInternetConnection = {
                         hasInternetConnection = viewModel.hasInternetConnection
                     },
@@ -222,6 +223,7 @@ private fun CourseInfoScreen(
     uiState: CourseInfoUIState,
     uiMessage: UIMessage?,
     uriScheme: String,
+    isRegistrationEnabled: Boolean,
     hasInternetConnection: Boolean,
     checkInternetConnection: () -> Unit,
     onRegisterClick: () -> Unit,
@@ -250,7 +252,8 @@ private fun CourseInfoScreen(
                 ) {
                     AuthButtonsPanel(
                         onRegisterClick = onRegisterClick,
-                        onSignInClick = onSignInClick
+                        onSignInClick = onSignInClick,
+                        showRegisterButton = isRegistrationEnabled
                     )
                 }
             }
@@ -367,6 +370,7 @@ fun CourseInfoScreenPreview() {
             ),
             uiMessage = null,
             uriScheme = "",
+            isRegistrationEnabled = true,
             hasInternetConnection = false,
             checkInternetConnection = {},
             onRegisterClick = {},

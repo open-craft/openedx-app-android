@@ -20,6 +20,7 @@ internal data class SignInUIState(
     val isBrowserLoginEnabled: Boolean = false,
     val isBrowserRegistrationEnabled: Boolean = false,
     val isLogistrationEnabled: Boolean = false,
+    val isRegistrationEnabled: Boolean = true,
     val showProgress: Boolean = false,
     val loginSuccess: Boolean = false,
     val agreement: RegistrationField? = null,

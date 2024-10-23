@@ -244,7 +244,7 @@ private fun AuthForm(
                 .fillMaxWidth()
                 .padding(top = 20.dp, bottom = 36.dp)
         ) {
-            if (state.isLogistrationEnabled.not()) {
+            if (state.isLogistrationEnabled.not() and state.isRegistrationEnabled) {
                 Text(
                     modifier = Modifier
                         .testTag("txt_register")

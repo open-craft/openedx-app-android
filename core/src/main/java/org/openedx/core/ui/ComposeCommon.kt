@@ -1172,22 +1172,29 @@ fun ConnectionErrorView(
 fun AuthButtonsPanel(
     onRegisterClick: () -> Unit,
     onSignInClick: () -> Unit,
+    showRegisterButton: Boolean,
 ) {
     Row {
-        OpenEdXButton(
-            modifier = Modifier
-                .testTag("btn_register")
-                .width(0.dp)
-                .weight(1f),
-            text = stringResource(id = R.string.core_register),
-            onClick = { onRegisterClick() }
-        )
-
+        if (showRegisterButton) {
+            OpenEdXButton(
+                modifier = Modifier
+                    .testTag("btn_register")
+                    .width(0.dp)
+                    .weight(1f),
+                text = stringResource(id = R.string.core_register),
+                onClick = { onRegisterClick() }
+            )
+        }
         OpenEdXOutlinedButton(
             modifier = Modifier
                 .testTag("btn_sign_in")
-                .width(100.dp)
-                .padding(start = 16.dp),
+                .then(
+                    if (showRegisterButton) {
+                        Modifier.width(100.dp).padding(start = 16.dp)
+                    } else {
+                        Modifier.weight(1f)
+                    }
+                ),
             text = stringResource(id = R.string.core_sign_in),
             onClick = { onSignInClick() },
             borderColor = MaterialTheme.appColors.textFieldBorder,
@@ -1310,7 +1317,7 @@ private fun ToolbarPreview() {
 @Preview
 @Composable
 private fun AuthButtonsPanelPreview() {
-    AuthButtonsPanel(onRegisterClick = {}, onSignInClick = {})
+    AuthButtonsPanel(onRegisterClick = {}, onSignInClick = {}, showRegisterButton = true)
 }
 
 @Preview

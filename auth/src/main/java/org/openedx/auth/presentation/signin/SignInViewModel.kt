@@ -62,6 +62,7 @@ class SignInViewModel(
             isMicrosoftAuthEnabled = config.getMicrosoftConfig().isEnabled(),
             isSocialAuthEnabled = config.isSocialAuthEnabled(),
             isLogistrationEnabled = config.isPreLoginExperienceEnabled(),
+            isRegistrationEnabled = config.isRegistrationEnabled(),
             agreement = agreementProvider.getAgreement(isSignIn = true)?.createHonorCodeField(),
         )
     )

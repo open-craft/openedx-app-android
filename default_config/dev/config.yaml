@@ -75,6 +75,8 @@ TOKEN_TYPE: "JWT"
 WHATS_NEW_ENABLED: false
 #feature flag enable Social Login buttons
 SOCIAL_AUTH_ENABLED: false
+#feature flag to disable registration from app
+REGISTRATION_ENABLED: true
 #Course navigation feature flags
 COURSE_NESTED_LIST_ENABLED: false
 COURSE_UNIT_PROGRESS_ENABLED: false

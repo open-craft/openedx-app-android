@@ -85,6 +85,7 @@ class SignInViewModelTest {
         every { config.getFacebookConfig() } returns FacebookConfig()
         every { config.getGoogleConfig() } returns GoogleConfig()
         every { config.getMicrosoftConfig() } returns MicrosoftConfig()
+        every { config.isRegistrationEnabled() } returns true
     }
 
     @After

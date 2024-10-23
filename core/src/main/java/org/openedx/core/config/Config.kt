@@ -111,6 +111,10 @@ class Config(context: Context) {
         return getBoolean(COURSE_UNIT_PROGRESS_ENABLED, false)
     }
 
+    fun isRegistrationEnabled(): Boolean {
+        return getBoolean(REGISTRATION_ENABLED, true)
+    }
+
     private fun getString(key: String, defaultValue: String): String {
         val element = getObject(key)
         return if (element != null) {
@@ -162,6 +166,7 @@ class Config(context: Context) {
         private const val GOOGLE = "GOOGLE"
         private const val MICROSOFT = "MICROSOFT"
         private const val PRE_LOGIN_EXPERIENCE_ENABLED = "PRE_LOGIN_EXPERIENCE_ENABLED"
+        private const val REGISTRATION_ENABLED = "REGISTRATION_ENABLED"
         private const val DISCOVERY = "DISCOVERY"
         private const val PROGRAM = "PROGRAM"
         private const val BRANCH = "BRANCH"

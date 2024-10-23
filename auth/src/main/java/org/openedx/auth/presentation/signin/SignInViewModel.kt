@@ -67,6 +67,7 @@ class SignInViewModel(
             isBrowserRegistrationEnabled = config.isBrowserRegistrationEnabled(),
             isSocialAuthEnabled = config.isSocialAuthEnabled(),
             isLogistrationEnabled = config.isPreLoginExperienceEnabled(),
+            isRegistrationEnabled = config.isRegistrationEnabled(),
             agreement = agreementProvider.getAgreement(isSignIn = true)?.createHonorCodeField(),
         )
     )

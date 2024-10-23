@@ -28,6 +28,7 @@ class LogistrationViewModel(
     private val discoveryTypeWebView get() = config.getDiscoveryConfig().isViewTypeWebView()
     val isBrowserRegistrationEnabled get() = config.isBrowserRegistrationEnabled()
     val isBrowserLoginEnabled get() = config.isBrowserLoginEnabled()
+    val isRegistrationEnabled: Boolean get() = config.isRegistrationEnabled()
     val apiHostUrl get() = config.getApiHostURL()
 
     fun navigateToSignIn(parentFragmentManager: FragmentManager) {

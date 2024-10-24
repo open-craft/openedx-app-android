@@ -140,5 +140,5 @@ class CourseRepository(
         }
     }
 
-    suspend fun getSequence(sectionId: String) = api.getSequence(sectionId).mapToDomain()
+    suspend fun getSequence(sequenceId: String) = api.getSequence(sequenceId).mapToDomain()
 }

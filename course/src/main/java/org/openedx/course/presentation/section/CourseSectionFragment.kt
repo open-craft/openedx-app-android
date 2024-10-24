@@ -108,6 +108,15 @@ class CourseSectionFragment : Fragment() {
                                             .replace(Regex("\\s"), "_"), it.id
                             )
                         }
+                    },
+                    onGoToPrerequisiteClick = { subSectionId ->
+                        viewModel.goToPrerequisiteSectionClickedEvent(subSectionId)
+                        router.navigateToCourseSubsections(
+                            fm = requireActivity().supportFragmentManager,
+                            courseId = viewModel.courseId,
+                            subSectionId = subSectionId,
+                            mode = CourseViewMode.FULL
+                        )
                     }
                 )
 
@@ -161,7 +170,8 @@ private fun CourseSectionScreen(
     uiMessage: UIMessage?,
     onBackClick: () -> Unit,
     onItemClick: (Block) -> Unit,
-    onDownloadClick: (Block) -> Unit
+    onDownloadClick: (Block) -> Unit,
+    onGoToPrerequisiteClick: (String) -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
     val title = when (uiState) {
@@ -265,7 +275,14 @@ private fun CourseSectionScreen(
                                     textAlign = TextAlign.Center,
                                     style = MaterialTheme.appTypography.titleMedium,
                                     color = MaterialTheme.appColors.textPrimary,
-
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                OpenEdXButton(
+                                    text = stringResource(id = R.string.course_go_to_prerequisite_section),
+                                    onClick = {
+                                        onGoToPrerequisiteClick(uiState.prereqId ?: "")
+                                    },
+                                    modifier = Modifier.padding(top = 16.dp)
                                 )
                             }
                         }
@@ -429,7 +446,8 @@ private fun CourseSectionScreenPreview() {
             uiMessage = null,
             onBackClick = {},
             onItemClick = {},
-            onDownloadClick = {}
+            onDownloadClick = {},
+            onGoToPrerequisiteClick = {}
         )
     }
 }
@@ -455,7 +473,31 @@ private fun CourseSectionScreenTabletPreview() {
             uiMessage = null,
             onBackClick = {},
             onItemClick = {},
-            onDownloadClick = {}
+            onDownloadClick = {},
+            onGoToPrerequisiteClick = {}
+        )
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, device = Devices.NEXUS_9)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, device = Devices.NEXUS_9)
+@Composable
+private fun CourseSectionScreenGatedPreview() {
+    OpenEdXTheme {
+        CourseSectionScreen(
+            windowSize = WindowSize(WindowType.Medium, WindowType.Medium),
+            uiState = CourseSectionUIState.Gated(
+                "Gated Subsection",
+                "Prerequisite Subsection",
+                "Prerequisite Id"
+            ),
+            uiMessage = null,
+            onBackClick = {},
+            onItemClick = {},
+            onDownloadClick = {},
+            onGoToPrerequisiteClick = {}
         )
     }
 }

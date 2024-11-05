@@ -70,6 +70,8 @@ class CourseInteractor(
 
     suspend fun removeDownloadModel(id: String) = repository.removeDownloadModel(id)
 
+    suspend fun getSubsection(subsectionId: String) = repository.getSequence(subsectionId)
+
     fun getDownloadModels() = repository.getDownloadModels()
 
 }

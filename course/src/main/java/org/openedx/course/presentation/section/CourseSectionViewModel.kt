@@ -88,6 +88,15 @@ class CourseSectionViewModel(
         _uiState.value = CourseSectionUIState.Loading
         viewModelScope.launch {
             try {
+                val sectionData = interactor.getSubsection(blockId)
+                if (sectionData.gatedContent.gated) {
+                    _uiState.value = CourseSectionUIState.Gated(
+                        prereqId = sectionData.gatedContent.prereqId,
+                        prereqSubsectionName = sectionData.gatedContent.prereqSubsectionName,
+                        gatedSubsectionName = sectionData.gatedContent.gatedSubsectionName,
+                        )
+                    return@launch
+                }
                 val courseStructure = when (mode) {
                     CourseViewMode.FULL -> interactor.getCourseStructureFromCache()
                     CourseViewMode.VIDEOS -> interactor.getCourseStructureForVideos()
@@ -162,6 +171,21 @@ class CourseSectionViewModel(
                     put(CourseAnalyticsKey.NAME.key, CourseAnalyticsEvent.UNIT_DETAIL.biValue)
                     put(CourseAnalyticsKey.COURSE_ID.key, courseId)
                     put(CourseAnalyticsKey.BLOCK_ID.key, blockId)
+                    put(CourseAnalyticsKey.CATEGORY.key, CourseAnalyticsKey.NAVIGATION.key)
+                }
+            )
+        }
+    }
+
+    fun goToPrerequisiteSectionClickedEvent(subSectionId: String) {
+        val currentState = uiState.value
+        if (currentState is CourseSectionUIState.Gated) {
+            analytics.logEvent(
+                event = CourseAnalyticsEvent.PREREQUISITE.eventName,
+                params = buildMap {
+                    put(CourseAnalyticsKey.NAME.key, CourseAnalyticsEvent.PREREQUISITE.biValue)
+                    put(CourseAnalyticsKey.COURSE_ID.key, courseId)
+                    put(CourseAnalyticsKey.BLOCK_ID.key, subSectionId)
                     put(CourseAnalyticsKey.CATEGORY.key, CourseAnalyticsKey.NAVIGATION.key)
                 }
             )

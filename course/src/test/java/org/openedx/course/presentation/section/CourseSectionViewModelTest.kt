@@ -228,6 +228,7 @@ class CourseSectionViewModelTest {
             "",
             interactor,
             resourceManager,
+            networkConnection,
             notifier,
             analytics,
         )
@@ -255,6 +256,7 @@ class CourseSectionViewModelTest {
             "",
             interactor,
             resourceManager,
+            networkConnection,
             notifier,
             analytics,
         )
@@ -284,6 +286,7 @@ class CourseSectionViewModelTest {
             "",
             interactor,
             resourceManager,
+            networkConnection,
             notifier,
             analytics,
         )
@@ -313,6 +316,7 @@ class CourseSectionViewModelTest {
             "",
             interactor,
             resourceManager,
+            networkConnection,
             notifier,
             analytics,
         )
@@ -335,6 +339,7 @@ class CourseSectionViewModelTest {
             "",
             interactor,
             resourceManager,
+            networkConnection,
             notifier,
             analytics,
         )
@@ -360,6 +365,7 @@ class CourseSectionViewModelTest {
             "",
             interactor,
             resourceManager,
+            networkConnection,
             notifier,
             analytics,
         )
@@ -388,6 +394,7 @@ class CourseSectionViewModelTest {
             "",
             interactor,
             resourceManager,
+            networkConnection,
             notifier,
             analytics,
         )

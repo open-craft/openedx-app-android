@@ -194,6 +194,7 @@ class CourseSectionViewModelTest {
         every { resourceManager.getString(R.string.core_error_no_connection) } returns noInternet
         every { resourceManager.getString(R.string.core_error_unknown_error) } returns somethingWrong
         every { resourceManager.getString(org.openedx.course.R.string.course_can_download_only_with_wifi) } returns cantDownload
+        every { networkConnection.isOnline() } returns true
         coEvery { interactor.getSubsection("id") } returns subsection
     }
 

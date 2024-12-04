@@ -213,6 +213,7 @@ class CourseSectionViewModelTest {
         every {
             resourceManager.getString(org.openedx.course.R.string.course_can_download_only_with_wifi)
         } returns cantDownload
+        every { networkConnection.isOnline() } returns true
         coEvery { interactor.getSubsection("id") } returns subsection
     }
 

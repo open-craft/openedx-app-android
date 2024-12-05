@@ -88,14 +88,16 @@ class CourseSectionViewModel(
         _uiState.value = CourseSectionUIState.Loading
         viewModelScope.launch {
             try {
-                val sectionData = interactor.getSubsection(blockId)
-                if (sectionData.gatedContent.gated) {
-                    _uiState.value = CourseSectionUIState.Gated(
-                        prereqId = sectionData.gatedContent.prereqId,
-                        prereqSubsectionName = sectionData.gatedContent.prereqSubsectionName,
-                        gatedSubsectionName = sectionData.gatedContent.gatedSubsectionName,
+                if (networkConnection.isOnline()) {
+                    val sectionData = interactor.getSubsection(blockId)
+                    if (sectionData.gatedContent.gated) {
+                        _uiState.value = CourseSectionUIState.Gated(
+                            prereqId = sectionData.gatedContent.prereqId,
+                            prereqSubsectionName = sectionData.gatedContent.prereqSubsectionName,
+                            gatedSubsectionName = sectionData.gatedContent.gatedSubsectionName,
                         )
-                    return@launch
+                        return@launch
+                    }
                 }
                 val courseStructure = when (mode) {
                     CourseViewMode.FULL -> interactor.getCourseStructureFromCache()

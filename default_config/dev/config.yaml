@@ -1,18 +1,17 @@
-API_HOST_URL: 'https://lms.dev.eshe.edpl.us'
-APPLICATION_ID: 'et.edu.ethernet.app.dev'
-ENVIRONMENT_DISPLAY_NAME: 'Eshe dev'
+API_HOST_URL: 'http://localhost:8000/'
+APPLICATION_ID: 'org.openedx.app'
+ENVIRONMENT_DISPLAY_NAME: 'Localhost'
 URI_SCHEME: ''
 FEEDBACK_EMAIL_ADDRESS: 'support@example.com'
 FAQ_URL: ''
-OAUTH_CLIENT_ID: 'OsPoP501BYx7G2oJDK3yJ5xEySEUKiJREobHV864'
+OAUTH_CLIENT_ID: 'OAUTH_CLIENT_ID'
 
 # Keep empty to hide setting
 AGREEMENT_URLS:
   PRIVACY_POLICY_URL: ''
   COOKIE_POLICY_URL: ''
   DATA_SELL_CONSENT_URL: ''
-  CONTACT_SUPPORT_URL: 'https://eshemoeasu.my.site.com/help/s/'
-  TOS_URL: 'https://courses.ethernet.edu.et/terms'
+  TOS_URL: ''
   EULA_URL: ''
   SUPPORTED_LANGUAGES: [ ] #en is default language
 
@@ -73,15 +72,15 @@ PLATFORM_FULL_NAME: "OpenEdX"
 #App sourceSets dir
 THEME_DIRECTORY: "openedx"
 #tokenType enum accepts JWT and BEARER only
-TOKEN_TYPE: "BEARER"
+TOKEN_TYPE: "JWT"
 #feature flag for activating What’s New feature
 WHATS_NEW_ENABLED: false
 #feature flag enable Social Login buttons
 SOCIAL_AUTH_ENABLED: false
 #feature flag to do the authentication flow in the browser to log in
-BROWSER_LOGIN: true
+BROWSER_LOGIN: false
 #feature flag to do the registration for in the browser
-BROWSER_REGISTRATION: true
+BROWSER_REGISTRATION: false
 #feature flag to disable registration from app
 REGISTRATION_ENABLED: false
 #Course navigation feature flags

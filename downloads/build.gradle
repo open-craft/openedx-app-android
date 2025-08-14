@@ -1,13 +1,12 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-parcelize'
-    id 'com.google.devtools.ksp'
     id "org.jetbrains.kotlin.plugin.compose"
+    id 'kotlin-parcelize'
 }
 
 android {
-    namespace 'org.openedx.discovery'
+    namespace 'org.openedx.downloads'
     compileSdkVersion compile_sdk_version
 
     defaultConfig {
@@ -25,6 +24,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility java_version
         targetCompatibility java_version
@@ -54,8 +54,6 @@ android {
 
 dependencies {
     implementation project(path: ':core')
-
-    implementation "androidx.activity:activity-compose:$activity_compose_version"
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "io.mockk:mockk:$mockk_version"

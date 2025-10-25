@@ -18,7 +18,7 @@ Modern vision of the mobile application for the Open edX platform from Raccoon G
 
 5. Select the build variant ``develop``, ``stage``, or ``prod``.
 
-6. Click the **Run** button.
+6. Click the **Run** buttons.
 
 ## Translations
 

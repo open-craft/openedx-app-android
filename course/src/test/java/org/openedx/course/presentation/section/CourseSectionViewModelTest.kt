@@ -11,6 +11,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -381,18 +382,15 @@ class CourseSectionViewModelTest {
 
     @Test
     fun `subsection is gated`() = runTest {
-        every { downloadDao.readAllData() } returns flow { emit(emptyList()) }
+        coEvery { downloadDao.getAllDataFlow() } returns flow {
+            emit(listOf(DownloadModelEntity.createFrom(downloadModel)))
+        }
         val viewModel = CourseSectionViewModel(
             "",
             interactor,
             resourceManager,
-            networkConnection,
-            preferencesManager,
             notifier,
             analytics,
-            coreAnalytics,
-            workerController,
-            downloadDao,
         )
 
         coEvery { interactor.getSubsection("id") } returns gatedSubsection

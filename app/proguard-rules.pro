@@ -67,3 +67,7 @@
 -dontwarn org.bouncycastle.openssl.PEMKeyPair
 -dontwarn org.bouncycastle.openssl.PEMParser
 -dontwarn org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter
+
+# XChaCha20Poly1305 is an optional dependency of nimbus-jose-jwt (via MSAL).
+# It's only needed for XChaCha20-Poly1305 encryption which this app doesn't use.
+-dontwarn com.google.crypto.tink.subtle.XChaCha20Poly1305
